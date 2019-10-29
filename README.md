@@ -57,9 +57,9 @@ npm run build --report
 - 当路由变化触发视图刷新，将匹配的组件渲染到相应的Router-View中
 - Vue-Router的插件化实现
 
-###由于时间原素，目前我只对VueRouter中的hash模式进行原理解析
+### 由于时间原素，目前我只对VueRouter中的hash模式进行原理解析
 
-####由单一职责原理我们将LRouter拆分如下几部分，这也是根据源码的目录进行讲解
+#### 由单一职责原理我们将LRouter拆分如下几部分，这也是根据源码的目录进行讲解
 - index 是我们创建LRouter实例的入口文件
    1. 初始化调用createMatcher生成路由匹配规则
    2. 通过HashHistory类生成 history对象，并注册hashChange事件，监听路由变化
