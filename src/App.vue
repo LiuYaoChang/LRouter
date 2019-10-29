@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <h1>这是首页</h1>
+    <h1>LRouter 实现VueRouter核心原理</h1>
     {{name}}
 
     <l-router-link to="/">Index</l-router-link>
@@ -10,17 +10,19 @@
     <HelloWorld/> -->
     <h1>视图</h1>
     <l-router-view></l-router-view>
+    <!-- <customer-form></customer-form> -->
   </div>
 </template>
 
 <script>
 // import { name } from './lib/LRouter/index.ts'
-import HelloWorld from './components/HelloWorld'
+// import HelloWorld from './components/HelloWorld'
+// import CustomerForm from './components/CustomerForm'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // CustomerForm
   },
   data () {
     return {

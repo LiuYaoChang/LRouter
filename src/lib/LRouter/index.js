@@ -9,8 +9,7 @@ export default class LRouter {
   app = null
   apps = []
 
-
-  constructor(options) {
+  constructor (options) {
     const routes = options.routes
     this.matcher = createMatcher(routes)
     this.history = new HashHistory(this, '/')
@@ -34,7 +33,6 @@ export default class LRouter {
 
       if (this.app === app) this.app = this.apps[0] || null
     })
-
 
     if (this.app) return
 

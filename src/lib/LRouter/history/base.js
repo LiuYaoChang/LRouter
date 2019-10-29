@@ -25,6 +25,7 @@ export class History {
   // 更新路由变化
   updateRoute (route) {
     const preRoute = this.current
+    console.log(preRoute)
     this.current = route
     this.cb(route)
   }

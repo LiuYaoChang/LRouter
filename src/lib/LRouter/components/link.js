@@ -12,14 +12,9 @@ export default {
     }
   },
 
-
   render (h) {
-
     const data = {}
-
     data.attrs = { href: '#' + this.to }
-
-
     return h(this.tag, data, this.$slots.default)
   }
 }

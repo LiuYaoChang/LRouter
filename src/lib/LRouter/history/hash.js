@@ -1,14 +1,21 @@
 import { History } from './base'
 
 export class HashHistory extends History {
-
   constructor (router, START) {
     super(router, START)
+    console.log(START)
   }
   // 注册hashchange事件监听
   setListener () {
     window.addEventListener('hashchange', () => {
       // 路由变化 了
+      this.transitionTo(getHash(), () => {
+
+      })
+    })
+
+    window.addEventListener('load', () => {
+      // 页面加载完成初始化
       this.transitionTo(getHash(), () => {
 
       })

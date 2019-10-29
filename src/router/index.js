@@ -6,7 +6,6 @@ import Detail from '../pages/Detail'
 
 Vue.use(LRouter)
 
-
 export default new LRouter({
   model: 'hash',
 

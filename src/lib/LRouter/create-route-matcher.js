@@ -1,7 +1,5 @@
 
-
-export function createRouteMatcher(routes, oldPathList, oldPathMap, oldNameMap) {
-
+export function createRouteMatcher (routes, oldPathList, oldPathMap, oldNameMap) {
   const pathList = oldPathList || []
 
   const pathMap = oldPathMap || Object.create(null)
@@ -12,7 +10,7 @@ export function createRouteMatcher(routes, oldPathList, oldPathMap, oldNameMap) 
     addRouter(pathList, pathMap, nameMap, route)
   })
 
-  function addRouter(pathList, pathMap, nameMap, route, parent) {
+  function addRouter (pathList, pathMap, nameMap, route, parent) {
     if (!pathMap[route.path]) {
       pathList.push(route.path)
 

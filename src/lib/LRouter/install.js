@@ -4,7 +4,6 @@ import Link from './components/link'
 
 var _Vue
 export function install (Vue) {
-
   if (install.installed && Vue === _Vue) return
   _Vue = Vue
   install.installed = true
@@ -12,7 +11,7 @@ export function install (Vue) {
   const isDef = v => v !== undefined
 
   Vue.mixin({
-    beforeCreate() {
+    beforeCreate () {
       if (isDef(this.$options.router)) {
         this._routerRoot = this
         this._router = this.$options.router
@@ -25,13 +24,12 @@ export function install (Vue) {
     }
   })
 
-
   Object.defineProperty(Vue.prototype, '$router', {
-    get () { return this._routerRoot._router}
+    get () { return this._routerRoot._router }
   })
 
   Object.defineProperty(Vue.prototype, '$route', {
-    get () { return this._routerRoot._route}
+    get () { return this._routerRoot._route }
   })
 
   // Vue.component()
