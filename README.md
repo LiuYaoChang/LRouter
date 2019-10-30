@@ -18,11 +18,11 @@ npm run build
 npm run build --report
 ```
 
-<p align="center">
+<!-- <p align="center">
     <a href="https://weapp.iviewui.com">
         <img width="200" src="https://file.iviewui.com/weapp-logo.svg">
     </a>
-</p>
+</p> -->
 
 # LRouter DEMO
 
@@ -49,7 +49,7 @@ npm run build --report
   }
 ```
 
-从Vue.use的实现中可以发现核心就是我们在封闭插件的时候，要在实例上挂载一个install 方法，只要调用use 的方法，你就可以在当前插件的install 方法中获取 到当前Vue引用，你就可以在install 方法中实现你想做的操作。
+从Vue.use的实现中可以发现核心就是我们在封装插件的时候，要在实例上挂载一个install 方法，只要调用use 的方法，你就可以在当前插件的install 方法中获取 到当前Vue引用，你就可以在install 方法中实现你想做的操作。
 
 ## 简述Vue-Router设计
 - 根据用户传入的routes配置项生成匹配规则
@@ -57,7 +57,7 @@ npm run build --report
 - 当路由变化触发视图刷新，将匹配的组件渲染到相应的Router-View中
 - Vue-Router的插件化实现
 
-### 由于时间原素，目前我只对VueRouter中的hash模式进行原理解析
+### 由于时间因素，目前我只对VueRouter中的hash模式进行原理解析
 
 #### 由单一职责原理我们将LRouter拆分如下几部分，这也是根据源码的目录进行讲解
 - index 是我们创建LRouter实例的入口文件
