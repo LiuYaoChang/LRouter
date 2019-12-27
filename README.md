@@ -38,8 +38,10 @@ npm run build --report
 
     // additional parameters
     const args = toArray(arguments, 1)
+    // 将Vue 作为第一个参数传入install 方法中
     args.unshift(this)
     if (typeof plugin.install === 'function') {
+      // 执行插件暴露的install 方法
       plugin.install.apply(plugin, args)
     } else if (typeof plugin === 'function') {
       plugin.apply(null, args)
@@ -51,7 +53,7 @@ npm run build --report
 
 从Vue.use的实现中可以发现核心就是我们在封装插件的时候，要在实例上挂载一个install 方法，只要调用use 的方法，你就可以在当前插件的install 方法中获取 到当前Vue引用，你就可以在install 方法中实现你想做的操作。
 
-## 简述Vue-Router设计
+## 简述LRouter设计
 - 根据用户传入的routes配置项生成匹配规则
 - 监听路由变化
 - 当路由变化触发视图刷新，将匹配的组件渲染到相应的Router-View中
@@ -60,7 +62,7 @@ npm run build --report
 ### 由于时间因素，目前我只对VueRouter中的hash模式进行原理解析
 
 #### 由单一职责原理我们将LRouter拆分如下几部分，这也是根据源码的目录进行讲解
-- index 是我们创建LRouter实例的入口文件
+- index 是我们创建LRouter实例的入口文件, 大致工作主要包含如下几点：
    1. 初始化调用createMatcher生成路由匹配规则
    2. 通过HashHistory类生成 history对象，并注册hashChange事件，监听路由变化
    3. 当路由变化，调用回调修改根实例上的_route属性（响应式属性），触发视图重新渲染
@@ -70,7 +72,7 @@ npm run build --report
    3. 全局注册 LRouterView 和LRouterLink组件
    4. 实现响应式属性 _route
 - create-matcher 主要是在创建LRouter实例的时候，生成macher对象，此对象是后面负责在路由变化 的时候进行规则匹配工作
-- create-route-match 主要为create-macher生成匹配的规则
+- create-route-match 主要为create-macher调用，并根据传入的配置生成匹配的规则
 - components 我们定义LRouterView 和LRouterLink组件的目录
    1. link， 定义LRouterLink组件
    2. view, 定义LRouterView 组件
@@ -96,7 +98,13 @@ constructor (options) {
 - 调用history监听hashchange事件，并注册路由变化 后的回调
 ```
   // 监听hashchange事件
+  const setListener = () => {
     history.setListener()
+  }
+  // 模拟异步, 等待当前所有任务完成后，去获取初始化渲染匹配内容
+  Promise.resolve().then(res => {
+    history.transitionTo(history.getCurrentLocation(), setListener, setListener)
+  })
   // 注册回调
     history.listen(route => {
       this.apps.forEach(app => {
@@ -142,13 +150,13 @@ export class HashHistory extends History {
       })
     })
 
-    window.addEventListener('load', () => {
+    <!-- window.addEventListener('load', () => {
       // 页面加载完成初始化
       // getHash 是一个辅助函数，获取 url 中#后面的路径
       this.transitionTo(getHash(), () => {
 
       })
-    })
+    }) -->
   }
 }
 
@@ -219,3 +227,18 @@ Object.defineProperty(Vue.prototype, '$router', {
 我们在这简单讲解下，Vue 实现数据驱动去更新视图的大体过程
 
 ![Vue 数据驱动](./static/images/vue-step.jpg '图片title')
+
+
+那么在install方法中通过如下方法，就在Vue 实例中挂载了一个响应式属性 vm._route
+```
+  //  给根实例添加_route的响应式属性
+  Vue.util.defineReactive(this, '_route', this._router.history.current)
+```
+
+
+在Router-view 渲染的时候去读取下这个属性，那么我们就可以收集到渲染函数的观察器， 从而在接下来只要在路由化生变化的时候，去更新这个属性，我们就可以重新触发视图的渲染了。
+```
+
+const route = parent.$route // vm.$route ，其实是代理 访问的就是 vm._route.
+
+```
