@@ -50,7 +50,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="handleSubmit">立即创建</el-button>
-        <el-button>取消</el-button>
+        <el-button @click="handlecors">测试CORS</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -71,11 +71,25 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
-      axios.get('http://localhost:8080/backend/test', this.form).then(res => {
-        console.log(res)
+    handleSubmit () {
+      axios.post('/api/user/create/customer', this.form).then(res => {
+        if (res.data.code === 1) {
+          this.$message({
+            message: '添加成功',
+            type: 'success'
+          })
+        }
+        for (let key of this.form) {
+          this.form[key] = ''
+        }
       }).catch(err => {
         console.log(err)
+      })
+    },
+    handlecors () {
+      axios.get('http://localhost:8080/backend/test?name=Liuyaochang', {
+        // `headers` are custom headers to be sent
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
       })
     }
   }

@@ -212,3 +212,10 @@ Object.defineProperty(Vue.prototype, '$router', {
   Vue.component('LRouterLink', Link)
 
 ```
+
+
+## VueRouter 是如何实现路由变化触发组件的重新渲染的？
+
+我们在这简单讲解下，Vue 实现数据驱动去更新视图的大体过程
+
+![图片alt]('./static/images/vue-step.jpg' ''图片title'')

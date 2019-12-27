@@ -1,13 +1,14 @@
 import Vue from 'vue'
-import LRouter from '../lib/LRouter'
+import KRouter from '../lib/LRouter'
+// import VueRouter from 'vue-router'
 
-import Index from '../pages/Index'
-import Detail from '../pages/Detail'
+import Index from '../pages/Index.vue'
+import Detail from '../pages/Detail.vue'
 
-Vue.use(LRouter)
+Vue.use(KRouter)
 
-export default new LRouter({
-  model: 'hash',
+export default new KRouter({
+  mode: 'hash',
 
   routes: [
     {

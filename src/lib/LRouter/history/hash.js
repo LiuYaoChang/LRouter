@@ -13,13 +13,17 @@ export class HashHistory extends History {
 
       })
     })
+    // window.addEventListener('load', () => {
+    //   // 页面加载完成初始化
+    //   this.transitionTo(getHash(), () => {
 
-    window.addEventListener('load', () => {
-      // 页面加载完成初始化
-      this.transitionTo(getHash(), () => {
+    //   })
+    // })
+  }
 
-      })
-    })
+  // 注册完路由立即触发更新
+  getCurrentLocation () {
+    return getHash()
   }
 }
 

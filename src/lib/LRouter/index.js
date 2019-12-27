@@ -39,9 +39,13 @@ export default class LRouter {
     this.app = app
 
     const history = this.history
-
-    history.setListener()
-
+    const setListener = () => {
+      history.setListener()
+    }
+    // 模拟异步
+    Promise.resolve().then(res => {
+      history.transitionTo(history.getCurrentLocation(), setListener, setListener)
+    })
     history.listen(route => {
       this.apps.forEach(app => {
         app._route = route

@@ -14,12 +14,14 @@ export class History {
   }
   transitionTo (location, onComplete) {
     const route = this.router.match(location)
-    this.confirRoute(() => {
+    this.confirmRoute(() => {
       this.updateRoute(route)
+      onComplete && onComplete(route)
     })
   }
 
-  confirRoute (cb) {
+  confirmRoute (cb) {
+    // 其他处理
     cb()
   }
   // 更新路由变化
